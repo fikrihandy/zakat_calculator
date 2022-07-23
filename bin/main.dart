@@ -2,7 +2,7 @@ import 'dart:io';
 import 'zakat_maal.dart';
 import 'zakat_penghasilan.dart';
 
-// ==> Main App Start <== //
+// ==> * * * Main App Start * * * <== //
 
 void main() {
   late bool continueApp = true;
@@ -16,9 +16,9 @@ void main() {
   } while (continueApp);
 }
 
-// ==> Main App End <== //
+// ==> * * * Main App End * * * <== //
 
-// ==> Method in Main App Start <== //
+// ==> * * * Method in Main App Start * * * <== //
 
 bool continueOrExit(String exitApp, bool continueApp) {
   do {
@@ -56,4 +56,4 @@ int inputRupiah(String text) {
   }
 }
 
-// ==> Method in Main App End <== //
+// ==> * * * Method in Main App End * * * <== //
