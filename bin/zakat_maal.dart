@@ -13,17 +13,29 @@ class ZakatMaal extends ZakatCalculator implements Calculate {
     this._hutangCicilan,
   );
 
-  int nishab() {
-    return goldPrice * 3;
+  @override
+  double getNishab() {
+    return goldPrice * 85;
   }
 
   @override
   void calculate() {
-    print('\n${'* ' * 8}\nZakat Maal | Nishab = ${nishab()}');
-    print('Calulating Zakat Maal');
-    print('Asset Emas Perak = ${intToRupiah(_emasPerakAsset)}');
-    print('Asset Uang = ${intToRupiah(_uangAsset)}');
-    print('Asset Lain = ${intToRupiah(_otherAsset)}');
-    print('Hutang / Cicilan = ${intToRupiah(_hutangCicilan)}');
+    double nishab = getNishab();
+    print('\n${'* ' * 8}\nZakat Maal | Nishab = ${numToRupiah(nishab)}');
+    print('Menghitung Zakat Maal');
+    print('Asset Emas Perak = ${numToRupiah(_emasPerakAsset)}');
+    print('Asset Uang = ${numToRupiah(_uangAsset)}');
+    print('Asset Lain = ${numToRupiah(_otherAsset)}');
+    print('Hutang / Cicilan = ${numToRupiah(_hutangCicilan)}');
+    double zakat;
+    if ((_emasPerakAsset + _uangAsset + _otherAsset) - _hutangCicilan >=
+        nishab) {
+      zakat = ((_emasPerakAsset + _uangAsset + _otherAsset) - _hutangCicilan) *
+          2.5 /
+          100;
+      print('${'* ' * 8}\nZakat Maal = Rp. $zakat');
+    } else {
+      print('Tidak memenuhi Nishab');
+    }
   }
 }

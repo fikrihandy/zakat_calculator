@@ -52,20 +52,22 @@ void main() {
 
 int showMenuAndGetInput() {
   int input;
+  bool retryIsTrue;
   do {
-    print("1. Menu 1\n2. Menu 2");
+    print("* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan");
     stdout.write("Pilih menu (1) (2) = ");
     try {
       input = int.parse(stdin.readLineSync()!);
     } on Exception {
-      stdout.write("Input salah! ");
+      stdout.write("\nInput salah! ");
       input = 0;
     }
-    if (input > 2 || input < 1) {
-      print('\nMenu tidak tersedia... ulangi...');
-      continue;
+    retryIsTrue = input > 2 || input < 1;
+    if (retryIsTrue) {
+      print('\nMenu tidak tersedia... ulangi...\n');
+      //continue;
     }
-  } while (input > 2 || input < 1);
+  } while (retryIsTrue);
   return input;
 }
 
@@ -83,6 +85,7 @@ bool continueOrExit() {
       print('\nKeluar dari aplikasi...');
       continueApp = false;
     } else if (exitApp == 'n') {
+      stdout.write('\n');
       break;
     } else {
       print('Input salah!');
