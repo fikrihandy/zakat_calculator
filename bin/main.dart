@@ -10,10 +10,39 @@ void main() {
 
     switch (inputMenu) {
       case 1:
-        print('menu 1');
+        print(
+          '\nMenghitung Zakat Maal\nBeri nilai 0 atau langsung enter untuk jika tidak ada.',
+        );
+
+        int emasPerakAsset = inputRupiah("Asset Emas Perak");
+        int uangAsset = inputRupiah("Asset Uang");
+        int otherAsset = inputRupiah("Asset Lain");
+        int hutangCicilan = inputRupiah("Hutang / Cicilan");
+
+        ZakatMaal zakatMaal = ZakatMaal(
+          emasPerakAsset,
+          uangAsset,
+          otherAsset,
+          hutangCicilan,
+        );
+
+        zakatMaal.calculate();
         break;
+
       case 2:
-        print('menu 2');
+        print(
+          '\nMenghitung Zakat Penghasilan\nBeri nilai 0 atau langsung enter untuk jika tidak ada.',
+        );
+
+        int penghasilanMonthly = inputRupiah('Penghasilan per bulan');
+        int bonusThr = inputRupiah('Bonus / THR / dll');
+
+        ZakatPenghasilan zakatPenghasilan = ZakatPenghasilan(
+          penghasilanMonthly,
+          bonusThr,
+        );
+
+        zakatPenghasilan.calculate();
         break;
     }
 
@@ -40,10 +69,6 @@ int showMenuAndGetInput() {
   return input;
 }
 
-// ==> * * * Main App End * * * <== //
-
-// ==> * * * Method in Main App Start * * * <== //
-
 bool continueOrExit() {
   String exitApp = '';
   bool continueApp = true;
@@ -58,7 +83,6 @@ bool continueOrExit() {
       print('\nKeluar dari aplikasi...');
       continueApp = false;
     } else if (exitApp == 'n') {
-      //print('\n');
       break;
     } else {
       print('Input salah!');
@@ -81,5 +105,3 @@ int inputRupiah(String text) {
     return 0;
   }
 }
-
-// ==> * * * Method in Main App End * * * <== //
