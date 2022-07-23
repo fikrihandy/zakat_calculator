@@ -2,18 +2,13 @@ import 'dart:io';
 import 'zakat_maal.dart';
 import 'zakat_penghasilan.dart';
 
-// ==> * * * Main App Start * * * <== //
-
 void main() {
-  String exitApp = '';
-  bool continueApp = true;
+  late bool continueApp;
 
-  // menu awal
   do {
-    int input = showMenu();
+    int inputMenu = showMenuAndGetInput();
 
-    // main app
-    switch (input) {
+    switch (inputMenu) {
       case 1:
         print('menu 1');
         break;
@@ -22,12 +17,11 @@ void main() {
         break;
     }
 
-    // continue using or exit from Main App
-    continueApp = continueOrExit(exitApp, continueApp);
+    continueApp = continueOrExit();
   } while (continueApp);
 }
 
-int showMenu() {
+int showMenuAndGetInput() {
   int input;
   do {
     print("1. Menu 1\n2. Menu 2");
@@ -39,7 +33,7 @@ int showMenu() {
       input = 0;
     }
     if (input > 2 || input < 1) {
-      print("Menu tidak tersedia... ulangi...");
+      print('\nMenu tidak tersedia... ulangi...');
       continue;
     }
   } while (input > 2 || input < 1);
@@ -50,7 +44,9 @@ int showMenu() {
 
 // ==> * * * Method in Main App Start * * * <== //
 
-bool continueOrExit(String exitApp, bool continueApp) {
+bool continueOrExit() {
+  String exitApp = '';
+  bool continueApp = true;
   do {
     stdout.write('\nAkhiri aplikasi (y) / (N) ? ');
     try {
