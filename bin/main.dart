@@ -9,7 +9,7 @@ void main() {
     print('App');
     print("Ini akan diisi oleh Main APP");
 
-    // continue or exit from APP
+    // continue or exit from App
     continueApp = continueOrExit(exitApp, continueApp);
   } while (continueApp);
 }
