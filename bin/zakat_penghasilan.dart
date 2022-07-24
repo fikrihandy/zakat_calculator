@@ -26,7 +26,7 @@ class ZakatPenghasilan extends ZakatCalculator implements Calculate {
       zakat = (_penghasilanMonthly + _bonusThr) * 2.5 / 100;
       print('${'* ' * 8}\nZakat Penghasilan = ${numToRupiah(zakat)}');
     } else {
-      print('Tidak memenuhi Nishab');
+      print('\nTidak memenuhi Nishab');
     }
   }
 }

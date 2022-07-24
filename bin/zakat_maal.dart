@@ -35,7 +35,7 @@ class ZakatMaal extends ZakatCalculator implements Calculate {
           100;
       print('${'* ' * 8}\nZakat Maal = Rp. $zakat');
     } else {
-      print('Tidak memenuhi Nishab');
+      print('\nTidak memenuhi Nishab');
     }
   }
 }
