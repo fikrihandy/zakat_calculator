@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-abstract class ZakatCalculator {
+class ZakatCalculator {
   int goldPrice = 938099; // Rp.938.099 (https://baznas.go.id/kalkulatorzakat)
 
   String numToRupiah(num number) {
@@ -10,12 +10,15 @@ abstract class ZakatCalculator {
       decimalDigits: 0,
     ).format(number);
   }
+
+  int goldPriceSetter(int newValue) {
+    goldPrice = newValue;
+    return goldPrice;
+  }
 }
 
 abstract class Calculate {
-  void calculate() {
-    // Calculating Zakat
-  }
+  void calculate();
 
   double getNishab() => 0;
 }

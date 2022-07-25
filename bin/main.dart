@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'zakat_maal.dart';
 import 'zakat_penghasilan.dart';
+import 'zakat_calculator.dart';
 
 void main() {
   late bool continueApp;
@@ -44,8 +45,15 @@ void main() {
 
         zakatPenghasilan.calculate();
         break;
-    }
 
+      case 3:
+        print('Sett gold price manually..\n');
+        ZakatCalculator zakatCalc = ZakatCalculator();
+        zakatCalc.goldPrice = 1;
+        //int newGoldPrice = goldPriceSetter(12); // new value
+        continueApp = true;
+        continue;
+    }
     continueApp = continueOrExit();
   } while (continueApp);
 }
@@ -54,18 +62,18 @@ int showMenuAndGetInput() {
   int input;
   bool retryIsTrue;
   do {
-    print("* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan");
-    stdout.write("Pilih menu (1) (2) = ");
+    print(
+        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas (Default = Rp.938.099)");
+    stdout.write("Pilih menu (1) (2) (3) = ");
     try {
       input = int.parse(stdin.readLineSync()!);
     } on Exception {
       stdout.write("\nInput salah! ");
       input = 0;
     }
-    retryIsTrue = input > 2 || input < 1;
+    retryIsTrue = input > 3 || input < 1;
     if (retryIsTrue) {
       print('\nMenu tidak tersedia... ulangi...\n');
-      //continue;
     }
   } while (retryIsTrue);
   return input;
