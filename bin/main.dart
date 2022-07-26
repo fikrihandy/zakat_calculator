@@ -5,9 +5,11 @@ import 'zakat_calculator.dart';
 
 void main() {
   late bool continueApp;
+  int inputGoldPrice = 0;
+  bool defaultGoldPrice = true;
 
   do {
-    int inputMenu = showMenuAndGetInput();
+    int inputMenu = showMenuAndGetInput(defaultGoldPrice, inputGoldPrice);
 
     switch (inputMenu) {
       case 1:
@@ -27,6 +29,11 @@ void main() {
           hutangCicilan,
         );
 
+        if (defaultGoldPrice == false) {
+          zakatMaal.goldPriceSetter(inputGoldPrice);
+          print(zakatMaal.goldPrice);
+        } // check for gold price
+
         zakatMaal.calculate();
         break;
 
@@ -43,14 +50,29 @@ void main() {
           bonusThr,
         );
 
+        if (defaultGoldPrice == false) {
+          zakatPenghasilan.goldPriceSetter(inputGoldPrice);
+          print(zakatPenghasilan.goldPrice);
+        } // check for gold price
+
         zakatPenghasilan.calculate();
         break;
 
       case 3:
-        print('Sett gold price manually..\n');
-        ZakatCalculator zakatCalc = ZakatCalculator();
-        zakatCalc.goldPrice = 1;
-        //int newGoldPrice = goldPriceSetter(12); // new value
+        defaultGoldPrice = false;
+        print('Masukkan harga emas terbaru');
+        stdout.write('Harga Emas = Rp. ');
+        try {
+          inputGoldPrice = int.parse(stdin.readLineSync()!);
+          if (inputGoldPrice < 0) {
+            inputGoldPrice = inputGoldPrice * -1;
+          }
+          print('Harga Emas di-update = ${numToRupiah(inputGoldPrice)}');
+        } on Exception {
+          stdout.write("\nInput salah!, menggunakan nilai default.");
+          defaultGoldPrice = true;
+        }
+
         continueApp = true;
         continue;
     }
@@ -58,12 +80,15 @@ void main() {
   } while (continueApp);
 }
 
-int showMenuAndGetInput() {
+int showMenuAndGetInput(bool defaultGoldPrice, int inputGoldPrice) {
   int input;
   bool retryIsTrue;
   do {
+    String keterangan = defaultGoldPrice == true
+        ? "Default = "
+        : "Manual = ${numToRupiah(inputGoldPrice)}";
     print(
-        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas (Default = Rp.938.099)");
+        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas Manual ($keterangan)");
     stdout.write("Pilih menu (1) (2) (3) = ");
     try {
       input = int.parse(stdin.readLineSync()!);
