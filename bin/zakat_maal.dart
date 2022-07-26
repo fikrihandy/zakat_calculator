@@ -1,4 +1,4 @@
-import 'zakat_calculator.dart';
+import 'zakat.dart';
 
 class ZakatMaal extends ZakatCalculator implements Calculate {
   final int _emasPerakAsset;
