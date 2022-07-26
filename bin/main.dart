@@ -12,10 +12,9 @@ void main() {
     int inputMenu = showMenuAndGetInput(defaultGoldPrice, inputGoldPrice);
 
     switch (inputMenu) {
-      case 1:
-        print(
-          '\nMenghitung Zakat Maal\nBeri nilai 0 atau langsung enter untuk jika tidak ada.',
-        );
+      case 1: // Zakat Maal
+        print('\nMenghitung Zakat Maal');
+        print('Beri nilai 0 atau langsung enter untuk jika tidak ada.');
 
         int emasPerakAsset = inputRupiah("Asset Emas Perak");
         int uangAsset = inputRupiah("Asset Uang");
@@ -31,16 +30,14 @@ void main() {
 
         if (defaultGoldPrice == false) {
           zakatMaal.goldPriceSetter(inputGoldPrice);
-          print(zakatMaal.goldPrice);
-        } // check for gold price
+        }
 
         zakatMaal.calculate();
         break;
 
-      case 2:
-        print(
-          '\nMenghitung Zakat Penghasilan\nBeri nilai 0 atau langsung enter untuk jika tidak ada.',
-        );
+      case 2: // Zakat Penghasilan
+        print('\nMenghitung Zakat Penghasilan');
+        print('Beri nilai 0 atau langsung enter untuk jika tidak ada.');
 
         int penghasilanMonthly = inputRupiah('Penghasilan per bulan');
         int bonusThr = inputRupiah('Bonus / THR / dll');
@@ -52,29 +49,36 @@ void main() {
 
         if (defaultGoldPrice == false) {
           zakatPenghasilan.goldPriceSetter(inputGoldPrice);
-          print(zakatPenghasilan.goldPrice);
-        } // check for gold price
+        }
 
         zakatPenghasilan.calculate();
         break;
 
-      case 3:
+      case 3: // Sett Harga Emas Manual
         defaultGoldPrice = false;
-        print('Masukkan harga emas terbaru');
+        print('Masukkan harga emas terbaru!');
+        print('Masukkan "0" untuk mengembalikan harga default!');
         stdout.write('Harga Emas = Rp. ');
         try {
           inputGoldPrice = int.parse(stdin.readLineSync()!);
           if (inputGoldPrice < 0) {
             inputGoldPrice = inputGoldPrice * -1;
+          } else if (inputGoldPrice == 0 ||
+              inputGoldPrice == ZakatCalculator().goldPrice) {
+            defaultGoldPrice = true;
+            print("Menggunakan nilai default.\n");
           }
-          print('Harga Emas di-update = ${numToRupiah(inputGoldPrice)}');
+          if (defaultGoldPrice == false) {
+            print('Harga Emas di-update = ${numToRupiah(inputGoldPrice)}\n');
+          }
         } on Exception {
-          stdout.write("\nInput salah!, menggunakan nilai default.");
+          print('Input salah!, menggunakan nilai default.\n');
           defaultGoldPrice = true;
         }
-
         continueApp = true;
         continue;
+      case 4: // Exit
+        break;
     }
     continueApp = continueOrExit();
   } while (continueApp);
@@ -85,18 +89,18 @@ int showMenuAndGetInput(bool defaultGoldPrice, int inputGoldPrice) {
   bool retryIsTrue;
   do {
     String keterangan = defaultGoldPrice == true
-        ? "Default = "
+        ? "Default = ${numToRupiah(ZakatCalculator().goldPrice)}"
         : "Manual = ${numToRupiah(inputGoldPrice)}";
     print(
-        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas Manual ($keterangan)");
-    stdout.write("Pilih menu (1) (2) (3) = ");
+        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas Manual ($keterangan)\n4. Exit");
+    stdout.write("Pilih menu (1) (2) (3) (4) = ");
     try {
       input = int.parse(stdin.readLineSync()!);
     } on Exception {
       stdout.write("\nInput salah! ");
       input = 0;
     }
-    retryIsTrue = input > 3 || input < 1;
+    retryIsTrue = input > 4 || input < 1;
     if (retryIsTrue) {
       print('\nMenu tidak tersedia... ulangi...\n');
     }
