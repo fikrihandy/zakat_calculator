@@ -16,16 +16,16 @@ void main() {
         print('\nMenghitung Zakat Maal');
         print('Beri nilai 0 atau langsung enter untuk jika tidak ada.');
 
-        int emasPerakAsset = inputRupiah("Asset Emas Perak");
-        int uangAsset = inputRupiah("Asset Uang");
+        int goldSilverAsset = inputRupiah("Asset Emas Perak");
+        int moneyAsset = inputRupiah("Asset Uang");
         int otherAsset = inputRupiah("Asset Lain");
-        int hutangCicilan = inputRupiah("Hutang / Cicilan");
+        int debt = inputRupiah("Hutang / Cicilan");
 
         ZakatMaal zakatMaal = ZakatMaal(
-          emasPerakAsset,
-          uangAsset,
+          goldSilverAsset,
+          moneyAsset,
           otherAsset,
-          hutangCicilan,
+          debt,
         );
 
         if (defaultGoldPrice == false) {
@@ -39,12 +39,12 @@ void main() {
         print('\nMenghitung Zakat Penghasilan');
         print('Beri nilai 0 atau langsung enter untuk jika tidak ada.');
 
-        int penghasilanMonthly = inputRupiah('Penghasilan per bulan');
-        int bonusThr = inputRupiah('Bonus / THR / dll');
+        int monthlyIncome = inputRupiah('Penghasilan per bulan');
+        int bonus = inputRupiah('Bonus / THR / dll');
 
         ZakatPenghasilan zakatPenghasilan = ZakatPenghasilan(
-          penghasilanMonthly,
-          bonusThr,
+          monthlyIncome,
+          bonus,
         );
 
         if (defaultGoldPrice == false) {
@@ -84,15 +84,15 @@ void main() {
   } while (continueApp);
 }
 
-int showMenuAndGetInput(bool defaultGoldPrice, int inputGoldPrice) {
+int showMenuAndGetInput(bool defaultPrice, int inputPrice) {
   int input;
   bool retryIsTrue;
   do {
-    String keterangan = defaultGoldPrice == true
+    String info = defaultPrice == true
         ? "Default = ${numToRupiah(ZakatCalculator().goldPrice)}"
-        : "Manual = ${numToRupiah(inputGoldPrice)}";
+        : "Manual = ${numToRupiah(inputPrice)}";
     print(
-        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas Manual ($keterangan)\n4. Exit");
+        "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas Manual ($info)\n4. Exit");
     stdout.write("Pilih menu (1) (2) (3) (4) = ");
     try {
       input = int.parse(stdin.readLineSync()!);
