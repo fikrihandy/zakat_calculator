@@ -1,10 +1,10 @@
 import 'zakat.dart';
 
 class ZakatPenghasilan extends ZakatCalculator implements Calculate {
-  final int _penghasilanMonthly;
-  final int _bonusThr;
+  final int _monthlyIncome;
+  final int _bonus;
 
-  ZakatPenghasilan(this._penghasilanMonthly, this._bonusThr);
+  ZakatPenghasilan(this._monthlyIncome, this._bonus);
 
   @override
   double getNishab() {
@@ -16,9 +16,9 @@ class ZakatPenghasilan extends ZakatCalculator implements Calculate {
     double nishab = getNishab();
     print('\n${'* ' * 8}\nZakat Penghasilan | Nishab = ${numToRupiah(nishab)}');
     print('Menghitung Zakat Penghasilan (Bulanan)');
-    print('Penghasilan / bln = ${numToRupiah(_penghasilanMonthly)}');
-    print('Bonus / THR / dll (bulan ini) = ${numToRupiah(_bonusThr)}');
-    int total = _penghasilanMonthly + _bonusThr;
+    print('Penghasilan / bln = ${numToRupiah(_monthlyIncome)}');
+    print('Bonus / THR / dll (bulan ini) = ${numToRupiah(_bonus)}');
+    int total = _monthlyIncome + _bonus;
     double zakat = total * 2.5 / 100;
     if (total >= nishab) {
       print(

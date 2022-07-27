@@ -1,16 +1,16 @@
 import 'zakat.dart';
 
 class ZakatMaal extends ZakatCalculator implements Calculate {
-  final int _emasPerakAsset;
-  final int _uangAsset;
+  final int _goldSilverAsset;
+  final int _moneyAsset;
   final int _otherAsset;
-  final int _hutangCicilan;
+  final int _debt;
 
   ZakatMaal(
-    this._emasPerakAsset,
-    this._uangAsset,
+    this._goldSilverAsset,
+    this._moneyAsset,
     this._otherAsset,
-    this._hutangCicilan,
+    this._debt,
   );
 
   @override
@@ -23,11 +23,11 @@ class ZakatMaal extends ZakatCalculator implements Calculate {
     double nishab = getNishab();
     print('\n${'* ' * 8}\nZakat Maal | Nishab = ${numToRupiah(nishab)}');
     print('Menghitung Zakat Maal (Asset dalam 1 tahun ini)');
-    print('Asset Emas Perak = ${numToRupiah(_emasPerakAsset)}');
-    print('Asset Uang = ${numToRupiah(_uangAsset)}');
+    print('Asset Emas Perak = ${numToRupiah(_goldSilverAsset)}');
+    print('Asset Uang = ${numToRupiah(_moneyAsset)}');
     print('Asset Lain = ${numToRupiah(_otherAsset)}');
-    print('Hutang / Cicilan = ${numToRupiah(_hutangCicilan)}');
-    int total = (_emasPerakAsset + _uangAsset + _otherAsset) - _hutangCicilan;
+    print('Hutang / Cicilan = ${numToRupiah(_debt)}');
+    int total = (_goldSilverAsset + _moneyAsset + _otherAsset) - _debt;
     double zakat = total * 2.5 / 100;
     if (total >= nishab) {
       print(
