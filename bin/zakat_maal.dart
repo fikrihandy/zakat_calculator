@@ -1,6 +1,6 @@
 import 'zakat.dart';
 
-class ZakatMaal extends ZakatCalculator implements Calculate {
+class ZakatMaal implements ZakatCalculator {
   final int _goldSilverAsset;
   final int _moneyAsset;
   final int _otherAsset;
@@ -15,14 +15,13 @@ class ZakatMaal extends ZakatCalculator implements Calculate {
 
   @override
   double getNishab() {
-    return goldPrice * 85;
+    return GoldPrice().goldPrice * 85;
   }
 
   @override
   void calculate() {
     double nishab = getNishab();
     print('\n${'* ' * 8}\nZakat Maal | Nishab = ${numToRupiah(nishab)}');
-    print('Menghitung Zakat Maal (Asset dalam 1 tahun ini)');
     print('Asset Emas Perak = ${numToRupiah(_goldSilverAsset)}');
     print('Asset Uang = ${numToRupiah(_moneyAsset)}');
     print('Asset Lain = ${numToRupiah(_otherAsset)}');
@@ -30,8 +29,9 @@ class ZakatMaal extends ZakatCalculator implements Calculate {
     int total = (_goldSilverAsset + _moneyAsset + _otherAsset) - _debt;
     double zakat = total * 2.5 / 100;
     if (total >= nishab) {
-      print(
-          '${'* ' * 8}\nTotal Asset = ${numToRupiah(total)} (tahun ini)\nZakat Maal = Rp. ${numToRupiah(zakat)}');
+      print('Menghitung Zakat Maal (Asset dalam 1 tahun ini)');
+      print('${'* ' * 8}\nTotal Asset = ${numToRupiah(total)} (tahun ini)');
+      print('Zakat Maal = Rp. ${numToRupiah(zakat)}');
     } else {
       print(
           '\nTidak memenuhi Nishab, (- ${numToRupiah(nishab - total)} lagi untuk terpenuhi)');

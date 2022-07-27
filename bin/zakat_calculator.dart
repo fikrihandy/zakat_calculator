@@ -29,7 +29,7 @@ void main() {
         );
 
         if (defaultGoldPrice == false) {
-          zakatMaal.goldPriceSetter(inputGoldPrice);
+          GoldPrice().goldPriceSetter(inputGoldPrice);
         }
 
         zakatMaal.calculate();
@@ -48,7 +48,7 @@ void main() {
         );
 
         if (defaultGoldPrice == false) {
-          zakatPenghasilan.goldPriceSetter(inputGoldPrice);
+          GoldPrice().goldPriceSetter(inputGoldPrice);
         }
 
         zakatPenghasilan.calculate();
@@ -64,7 +64,7 @@ void main() {
           if (inputGoldPrice < 0) {
             inputGoldPrice = inputGoldPrice * -1;
           } else if (inputGoldPrice == 0 ||
-              inputGoldPrice == ZakatCalculator().goldPrice) {
+              inputGoldPrice == GoldPrice().goldPrice) {
             defaultGoldPrice = true;
             print("Menggunakan nilai default.\n");
           }
@@ -89,7 +89,7 @@ int showMenuAndGetInput(bool defaultPrice, int inputPrice) {
   bool retryIsTrue;
   do {
     String info = defaultPrice == true
-        ? "Default = ${numToRupiah(ZakatCalculator().goldPrice)}"
+        ? "Default = ${numToRupiah(GoldPrice().goldPrice)}"
         : "Manual = ${numToRupiah(inputPrice)}";
     print(
         "* Kalkulator Zakat *\n1. Zakat Maal\n2. Zakat Penghasilan\n3. Sett Harga Emas Manual ($info)\n4. Exit");
